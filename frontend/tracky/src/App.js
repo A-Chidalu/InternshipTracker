@@ -1,20 +1,32 @@
 import img from './img_man.jpg'
 import ham from './hamburger.png'
 import NavBar from './components/NavBar'
-import Hero from './components/Hero'
+import Hero from './components/Hero';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import HeroSection from './components/HeroSection';
+import Signup from './components/Signup';
+import SignupSection from './components/SignupSection';
+import NotFoundSection from './components/NotFoundSection';
 
 function App() {
   return (
-    <div  style={{
+    <div style={{
       background: 'linear-gradient(to bottom, #ffffff, #f6e8fa, #f9cee8, #ffb3c8, #ff9b9b)',
     }}>
-      <NavBar img={ham} />
-
-
-      <div className="min-h-screen max-h-screen max-w-screen-xlg ml-auto mr-auto flex justify-center items-center flex-col lg:flex-row">
-       <Hero/>
-        <img src={img} alt="A Cool img" className="" />
-      </div>
+      <BrowserRouter>
+        <NavBar img={ham} />
+        <Switch>
+          <Route path="/signup" exact>
+            <SignupSection />
+          </Route>
+          <Route path="/" exact>
+            <HeroSection />
+          </Route>
+          <Route path="*">
+            <NotFoundSection />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
